@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String        @id @default(uuid())
+  fname           String
+  lname           String
+  email           String        @unique
+  phone           String        @unique
+  parentPhone     String?       @unique
+  Gov             String
+  level           String
+  role            String        @default("student")
+  password        String
+  jwt             String?
+  resetPasswordToken String?
+  resetExpiresTime DateTime?
+  courses         UserCourses[]
+  quizes          UserQuizes[]
+}
+
+model Level {
+  id        String   @id @default(uuid())
+  levelName String
+  courses   Course[]
+}
+
+model Course {
+  id          String        @id @default(uuid())
+  courseName  String
+  description String
+  price       Float
+  users       UserCourses[]
+  level       Level         @relation(fields: [levelId], references: [id])
+  levelId     String
+  subjects    Subject[]
+}
+
+model Subject {
+  id          String       @id @default(uuid())
+  subjectName String
+  description String
+  course      Course       @relation(fields: [courseId], references: [id])
+  courseId    String
+  lesson      Lesson[]
+  quiz        UserQuizes[]
+}
+
+model Lesson {
+  id         String  @id @default(uuid())
+  lessonName String
+  type       String
+  subject    Subject @relation(fields: [subjectId], references: [id])
+  subjectId  String
+}
+
+model Quiz {
+  id        String       @id @default(uuid())
+  quizName  String
+  users     UserQuizes[]
+  questions Questions[]
+}
+
+model Questions {
+  id      String    @id @default(uuid())
+  quiz    Quiz      @relation(fields: [quizId], references: [id])
+  quizId  String
+  answers Answers[]
+}
+
+model Answers {
+  id         String    @id @default(uuid())
+  question   Questions @relation(fields: [questionId], references: [id])
+  questionId String
+}
+
+model UserCourses {
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  course   Course @relation(fields: [courseId], references: [id])
+  courseId String
+
+  @@id([userId, courseId])
+}
+
+model UserQuizes {
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  quiz   Quiz   @relation(fields: [quizId], references: [id])
+  quizId String
+
+  subject   Subject @relation(fields: [subjectId], references: [id])
+  subjectId String
+
+  @@id([userId, quizId, subjectId])
+}
