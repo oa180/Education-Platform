@@ -11,21 +11,21 @@ datasource db {
 }
 
 model User {
-  id              String        @id @default(uuid())
-  fname           String
-  lname           String
-  email           String        @unique
-  phone           String        @unique
-  parentPhone     String?       @unique
-  Gov             String
-  level           String
-  role            String        @default("student")
-  password        String
-  jwt             String?
+  id                 String        @id @default(uuid())
+  fname              String
+  lname              String
+  email              String        @unique
+  phone              String        @unique
+  parentPhone        String?       @unique
+  Gov                String
+  level              String
+  role               String        @default("student")
+  password           String
+  jwt                String?
   resetPasswordToken String?
-  resetExpiresTime DateTime?
-  courses         UserCourses[]
-  quizes          UserQuizes[]
+  resetExpiresTime   DateTime?
+  courses            UserCourses[]
+  quizes             UserQuizes[]
 }
 
 model Level {
@@ -64,21 +64,26 @@ model Lesson {
 }
 
 model Quiz {
-  id        String       @id @default(uuid())
-  quizName  String
-  users     UserQuizes[]
-  questions Questions[]
+  id          String       @id @default(uuid())
+  quizName    String
+  duration    Int
+  description String?
+  users       UserQuizes[]
+  questions   Questions[]
 }
 
 model Questions {
-  id      String    @id @default(uuid())
-  quiz    Quiz      @relation(fields: [quizId], references: [id])
-  quizId  String
-  answers Answers[]
+  id       String    @id @default(uuid())
+  question String
+  quiz     Quiz      @relation(fields: [quizId], references: [id])
+  quizId   String
+  answers  Answers[]
 }
 
 model Answers {
   id         String    @id @default(uuid())
+  answer     String
+  status     Boolean   @default(false)
   question   Questions @relation(fields: [questionId], references: [id])
   questionId String
 }

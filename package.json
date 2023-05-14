@@ -39,6 +39,7 @@
     "nodemon": "^2.0.21",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
+    "paypal-rest-sdk": "^1.8.1",
     "prisma": "^4.11.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",

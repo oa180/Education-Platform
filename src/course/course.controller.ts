@@ -18,6 +18,8 @@ import { RolesEnum } from 'src/factory/enums/roles.enum';
 import { JwtGuard } from 'src/guards/jwt.guard';
 import { UpdateCourseDto } from './dtos/update-course.dto';
 import { CreateCourseDto } from './dtos/create-course.dto';
+import { EnrollCourseDto } from './dtos/enroll-course.dto';
+import { GetUser } from 'src/auth/decorators/get-user.decorator';
 
 @UseGuards(JwtGuard, RolesGuard)
 @Roles('admin')
@@ -54,5 +56,12 @@ export class CourseController {
   @Delete('lId')
   deleteCourse(@Param('lId') lId: string) {
     return this.courseService.deleteCourse(lId);
+  }
+
+  // Enroll in a course using course id
+  @Roles('student')
+  @Post('enroll')
+  enrollCourse(@Body('courseId') courseId: string, @GetUser('id') uId: string) {
+    return this.courseService.enrollCourse(courseId, uId);
   }
 }

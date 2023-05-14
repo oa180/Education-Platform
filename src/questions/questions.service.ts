@@ -10,6 +10,7 @@ export class QuestionsService {
 
   //   Create New Questions
   async createQuestions(createQuestionsDto: any) {
+    await this.crud.findOne(this.prisma.quiz, createQuestionsDto.quizId);
     return await this.crud.create(this.prisma.questions, createQuestionsDto);
   }
 
@@ -28,7 +29,11 @@ export class QuestionsService {
   }
   //   Get One Questionsccccc
   async getOneQuestions(lId: any) {
-    return await this.crud.findOne(this.prisma.questions, lId);
+    // return await this.crud.findOne(this.prisma.questions, lId);
+    return await this.prisma.questions.findUnique({
+      where: { id: lId },
+      include: { answers: true },
+    });
   }
   //   Delete one Questions
   async deleteQuestions(lId: any) {

@@ -24,7 +24,12 @@ export class QuizService {
   }
   //   Get One Quizccccc
   async getOneQuiz(lId: any) {
-    return await this.crud.findOne(this.prisma.quiz, lId);
+    return await this.prisma.quiz.findUnique({
+      where: {
+        id: lId,
+      },
+      include: { questions: true, _count: { select: { questions: true } } },
+    });
   }
   //   Delete one Quiz
   async deleteQuiz(lId: any) {
