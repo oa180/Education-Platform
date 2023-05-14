@@ -10,6 +10,7 @@ export class AnswersService {
 
   //   Create New Answers
   async createAnswers(createAnswersDto: any) {
+    await this.crud.findOne(this.prisma.questions, createAnswersDto.questionId);
     return await this.crud.create(this.prisma.answers, createAnswersDto);
   }
 

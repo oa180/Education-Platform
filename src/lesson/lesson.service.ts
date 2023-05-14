@@ -10,6 +10,8 @@ export class LessonService {
 
   //   Create New Lesson
   async createLesson(createLessonDto: any) {
+    await this.crud.findOne(this.prisma.subject, createLessonDto.subjectId);
+
     return await this.crud.create(this.prisma.lesson, createLessonDto);
   }
 

@@ -32,7 +32,7 @@ export class QuizController {
   }
 
   //   Update Quiz
-  @Patch()
+  @Patch(':lId')
   updateQuiz(@Body() updateQuizDto: UpdateQuizDto, @Param('lId') lId: string) {
     return this.quizService.updateQuiz(updateQuizDto, lId);
   }
@@ -47,6 +47,7 @@ export class QuizController {
   getOneQuiz(@Param('lId') lId: string) {
     return this.quizService.getOneQuiz(lId);
   }
+
   //   Update Quiz
   @Delete('lId')
   deleteQuiz(@Param('lId') lId: string) {

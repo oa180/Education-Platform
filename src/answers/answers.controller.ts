@@ -32,7 +32,7 @@ export class AnswersController {
   }
 
   //   Update Answers
-  @Patch()
+  @Patch(':lId')
   updateAnswers(
     @Body() updateAnswersDto: UpdateAnswersDto,
     @Param('lId') lId: string,
