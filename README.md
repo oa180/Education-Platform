@@ -9,12 +9,12 @@ Prisma
 Stripe payment service
 
 ## Installation
-Clone the repository to your local machine.
-Open the project in Visual Studio.
-Install any necessary packages using npm install.
-Make sure to update the server name in appSettings file.
-Add user secrets, right click on the project inside visual studio and add the .env file.
-You can contact one of the contrubuters to get the secret keys.
+1.Clone the repository to your local machine.
+2.Open the project in Visual Studio.
+3.Install any necessary packages using npm install.
+4.Make sure to update the server name in appSettings file.
+5.Add user secrets, right click on the project inside visual studio and add the .env file.
+6.You can contact one of the contrubuters to get the secret keys.
 
 ```bash
 $ npm install
