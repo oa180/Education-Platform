@@ -8,8 +8,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
       transport: {
         host: 'smtp.sendgrid.net',
         auth: {
-          user: 'apikey',
-          pass: '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',
+          user: '',
+          pass: '',
         },
       },
     }),
