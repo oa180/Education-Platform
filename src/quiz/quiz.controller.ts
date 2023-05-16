@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -18,9 +19,9 @@ import { RolesEnum } from 'src/factory/enums/roles.enum';
 import { JwtGuard } from 'src/guards/jwt.guard';
 import { CreateQuizDto } from './dtos/create-quiz.dto';
 import { UpdateQuizDto } from './dtos/update-quiz.dto';
+import { GetUser } from 'src/auth/decorators/get-user.decorator';
 
 @UseGuards(JwtGuard, RolesGuard)
-@Roles('admin')
 @Controller('quiz')
 export class QuizController {
   constructor(private quizService: QuizService) {}
@@ -28,6 +29,7 @@ export class QuizController {
   //   Create New Quiz
   @Post()
   createQuiz(@Body() createQuizDto: CreateQuizDto) {
+    console.log(createQuizDto);
     return this.quizService.createQuiz(createQuizDto);
   }
 
@@ -52,5 +54,23 @@ export class QuizController {
   @Delete('lId')
   deleteQuiz(@Param('lId') lId: string) {
     return this.quizService.deleteQuiz(lId);
+  }
+
+  // Solve Quiz
+  @Get('takeQuiz/:lId')
+  takeQuiz(@Param('lId') lId: string) {
+    return this.quizService.takeQuiz(lId);
+  }
+
+  // Submit Answers
+  @Post('submit')
+  submitAnswers(
+    @Body('answersIds') answers: Array<string>,
+    @GetUser('id') uId: string,
+    @Query() queryObj: object,
+  ) {
+    console.log(queryObj);
+
+    return this.quizService.submitAnswers(answers, uId, queryObj);
   }
 }

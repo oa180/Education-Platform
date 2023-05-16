@@ -57,6 +57,11 @@ export class CourseController {
   deleteCourse(@Param('lId') lId: string) {
     return this.courseService.deleteCourse(lId);
   }
+  @Roles('student')
+  @Get('pay-course/:lId')
+  PayCourse(@Param('lId') lId: string) {
+    return this.courseService.PayCourse(lId);
+  }
 
   // Enroll in a course using course id
   @Roles('student')
