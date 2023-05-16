@@ -59,6 +59,7 @@ model Lesson {
   id         String  @id @default(uuid())
   lessonName String
   type       String
+  file       String
   subject    Subject @relation(fields: [subjectId], references: [id])
   subjectId  String
 }
@@ -68,6 +69,7 @@ model Quiz {
   quizName    String
   duration    Int
   description String?
+  grade       Int          @default(10)
   users       UserQuizes[]
   questions   Questions[]
 }
@@ -107,6 +109,9 @@ model UserQuizes {
 
   subject   Subject @relation(fields: [subjectId], references: [id])
   subjectId String
+
+  score      Int
+  passStatus Boolean @default(false)
 
   @@id([userId, quizId, subjectId])
 }

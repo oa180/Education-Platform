@@ -7,7 +7,10 @@ import {
   Patch,
   Post,
   Req,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
+  BadRequestException,
 } from '@nestjs/common';
 
 import { AuthGuard } from '@nestjs/passport';
@@ -18,6 +21,10 @@ import { JwtGuard } from 'src/guards/jwt.guard';
 import { LessonService } from './lesson.service';
 import { CreateLessonDto } from './dtos/create-lesson.dto';
 import { UpdateLessonDto } from './dtos/update-lesson.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { MulterHandler } from 'src/factory/multer.factory';
+import { ErrorHandler } from 'src/factory/errorHandler';
 
 @UseGuards(JwtGuard, RolesGuard)
 @Roles('admin')
@@ -26,8 +33,33 @@ export class LessonController {
   constructor(private lessonService: LessonService) {}
 
   //   Create New Lesson
-  @Post()
-  createLesson(@Body() createLessonDto: CreateLessonDto) {
+  @Post('video')
+  @UseInterceptors(
+    FileInterceptor('video', {
+      storage: MulterHandler.createDiskStorage('./upload/files/lessons'),
+      fileFilter: MulterHandler.videoMulterFilter,
+    }),
+  )
+  createLessonVid(
+    @Body() createLessonDto: CreateLessonDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    createLessonDto.file = file.path;
+    return this.lessonService.createLesson(createLessonDto);
+  }
+
+  @Post('file')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: MulterHandler.createDiskStorage('./upload/files/lessons'),
+      fileFilter: MulterHandler.fileMulterFilter,
+    }),
+  )
+  createLesson(
+    @Body() createLessonDto: CreateLessonDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    createLessonDto.file = file.path;
     return this.lessonService.createLesson(createLessonDto);
   }
 
