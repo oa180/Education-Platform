@@ -24,9 +24,20 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This is a web application for a educaional  platform site. It is built using Nestjs and  includes several features such as user authentication, email confirmation, external login , admin and student management, CRUD for level, courses, subject, lesson, quiz,qus,ans, pay course with Stripe payment 
+
+## Technology Stack
+Nestjs
+Prisma
+Stripe payment service
 
 ## Installation
+Clone the repository to your local machine.
+Open the project in Visual Studio.
+Install any necessary packages using npm install.
+Make sure to update the server name in appSettings file.
+Add user secrets, right click on the project inside visual studio and add the .env file.
+You can contact one of the contrubuters to get the secret keys.
 
 ```bash
 $ npm install
