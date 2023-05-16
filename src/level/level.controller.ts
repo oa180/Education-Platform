@@ -32,7 +32,7 @@ export class LevelController {
   }
 
   //   Update Level
-  @Patch()
+  @Patch(':lId')
   updateLevel(
     @Body() updateLevelDto: UpdateLevelDto,
     @Param('lId') lId: string,

@@ -9,6 +9,7 @@ export class SubjectService {
 
   //   Create New Subject
   async createSubject(createSubjectDto: any) {
+    await this.crud.findOne(this.prisma.course, createSubjectDto.courseId);
     return await this.crud.create(this.prisma.subject, createSubjectDto);
   }
 

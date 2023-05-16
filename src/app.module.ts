@@ -12,9 +12,14 @@ import { LessonModule } from './lesson/lesson.module';
 import { QuizModule } from './quiz/quiz.module';
 import { QuestionsModule } from './questions/questions.module';
 import { AnswersModule } from './answers/answers.module';
+import { PaymentModule } from './payment/payment.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
+    MulterModule.register({
+      dest: './lesson/Files/lessons',
+    }),
     PrismaModule,
     ConfigModule.forRoot({
       isGlobal: true,
@@ -28,6 +33,7 @@ import { AnswersModule } from './answers/answers.module';
     QuizModule,
     QuestionsModule,
     AnswersModule,
+    PaymentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
