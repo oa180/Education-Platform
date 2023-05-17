@@ -1,0 +1,1540 @@
+{
+	"info": {
+		"_postman_id": "700d733a-f5af-4746-bc2b-7f5b4d3c3d80",
+		"name": "Educational Platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16607797"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fname\": \"Mostafa\",\r\n  \"lname\": \"Mekawy\",\r\n  \"email\": \"manomustafa@gmail.com\",\r\n  \"phone\": \"01110000000\",\r\n  \"parentPhone\": \"01200000000\",\r\n  \"Gov\": \"cairo\",\r\n  \"level\": \"1\",\r\n  \"password\": \"123456\",\r\n  \"passwordConfirm\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/signup",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"jwt\", pm.response.json().jwt);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"oa20180180@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/signin",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forget Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"oa20180180@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/forgetpassword",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"forgetpassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Level",
+			"item": [
+				{
+					"name": "Create Level",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"levelName\": \"الصف الدراسي الاول\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}level",
+							"host": [
+								"{{URL}}level"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Level",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"levelName\": \"الصف الدراسي الاول\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}level/28485f7c-52fd-46b9-b129-678438ce7a68",
+							"host": [
+								"{{URL}}level"
+							],
+							"path": [
+								"28485f7c-52fd-46b9-b129-678438ce7a68"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Level",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}level/28485f7c-52fd-46b9-b129-678438ce7a68",
+							"host": [
+								"{{URL}}level"
+							],
+							"path": [
+								"28485f7c-52fd-46b9-b129-678438ce7a68"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Levels",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}level",
+							"host": [
+								"{{URL}}level"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Level",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}level/28485f7c-52fd-46b9-b129-678438ce7a68",
+							"host": [
+								"{{URL}}level"
+							],
+							"path": [
+								"28485f7c-52fd-46b9-b129-678438ce7a68"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "Create Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"courseName\": \"حل اختبارات شاملة\",\r\n  \"description\": \"حل ١٠ اختبارات شاملة على المنهج كاملا\",\r\n  \"price\": 75,\r\n  \"levelId\": \"687e7df4-0f46-40d0-a7f5-4f525789c2f6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}course",
+							"host": [
+								"{{URL}}course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Course",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"courseName\": \"الترم الثانى كاملاً\",\r\n  \"description\": \"يشمل فصلى الوراثة والتصنيف وحل اختبارات شاملة\",\r\n  \"price\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}course/cd43e94b-b947-482b-8853-a44b27227e32",
+							"host": [
+								"{{URL}}course"
+							],
+							"path": [
+								"cd43e94b-b947-482b-8853-a44b27227e32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}course/cd43e94b-b947-482b-8853-a44b27227e32",
+							"host": [
+								"{{URL}}course"
+							],
+							"path": [
+								"cd43e94b-b947-482b-8853-a44b27227e32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}course",
+							"host": [
+								"{{URL}}course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Create Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}course/cd43e94b-b947-482b-8853-a44b27227e32",
+							"host": [
+								"{{URL}}course"
+							],
+							"path": [
+								"cd43e94b-b947-482b-8853-a44b27227e32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Course Enroll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{URL}}course/enroll",
+							"host": [
+								"{{URL}}course"
+							],
+							"path": [
+								"enroll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pay-course",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subject",
+			"item": [
+				{
+					"name": "Create Subject",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"subjectName\": \"الدرس الأول\",\r\n  \"description\": \"مقدمة الوراثة + النظرية الكروموسومية\",\r\n  \"courseId\": \"95d38ba5-1c4c-41ba-b561-b25633467793\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}subject",
+							"host": [
+								"{{URL}}subject"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Subject",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"subjectName\": \"الدرس الأول\",\r\n  \"description\": \"مقدمة الوراثة + النظرية الكروموسومية\",\r\n  \"courseId\": \"cd43e94b-b947-482b-8853-a44b27227e32\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}subject/36cd2974-db46-49a0-a4c1-28ae15e3630c",
+							"host": [
+								"{{URL}}subject"
+							],
+							"path": [
+								"36cd2974-db46-49a0-a4c1-28ae15e3630c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Subject",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}subject/36cd2974-db46-49a0-a4c1-28ae15e3630c",
+							"host": [
+								"{{URL}}subject"
+							],
+							"path": [
+								"36cd2974-db46-49a0-a4c1-28ae15e3630c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Subject",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}subject",
+							"host": [
+								"{{URL}}subject"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Subject",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}subject/36cd2974-db46-49a0-a4c1-28ae15e3630c",
+							"host": [
+								"{{URL}}subject"
+							],
+							"path": [
+								"36cd2974-db46-49a0-a4c1-28ae15e3630c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lesson",
+			"item": [
+				{
+					"name": "Create Lesson video",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"lessonName\": \"مذاكرة الدرس الأول وراثة\",\r\n  \"type\": \"video\",\r\n  \"subjectId\": \"cccb68a0-38b5-4d72-9588-7da361e417c4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}lesson",
+							"host": [
+								"{{URL}}lesson"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Lesson file",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"lessonName\": \"مذاكرة الدرس الأول وراثة\",\r\n  \"type\": \"video\",\r\n  \"subjectId\": \"cccb68a0-38b5-4d72-9588-7da361e417c4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}lesson/file",
+							"host": [
+								"{{URL}}lesson"
+							],
+							"path": [
+								"file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Lesson",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"lessonName\": \"مذاكرة الدرس الأول وراثة\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}lesson/b5327554-43e2-4fd0-bdc9-5a8c2e2a6eaa",
+							"host": [
+								"{{URL}}lesson"
+							],
+							"path": [
+								"b5327554-43e2-4fd0-bdc9-5a8c2e2a6eaa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Lesson",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}lesson/b5327554-43e2-4fd0-bdc9-5a8c2e2a6eaa",
+							"host": [
+								"{{URL}}lesson"
+							],
+							"path": [
+								"b5327554-43e2-4fd0-bdc9-5a8c2e2a6eaa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Lesson",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}lesson",
+							"host": [
+								"{{URL}}lesson"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Lesson",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}lesson/b5327554-43e2-4fd0-bdc9-5a8c2e2a6eaa",
+							"host": [
+								"{{URL}}lesson"
+							],
+							"path": [
+								"b5327554-43e2-4fd0-bdc9-5a8c2e2a6eaa"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Quiz",
+			"item": [
+				{
+					"name": "Create Quiz",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"quizName\": \"كويز النظرية الكروموسومية\",\r\n  \"duration\": 45\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}quiz",
+							"host": [
+								"{{URL}}quiz"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Quiz",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"quizName\": \"كويز النظرية الكروموسومية\",\r\n  \"duration\": 45\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}quiz/42a25b19-2110-46fd-a80b-fe8bdb3cc27d",
+							"host": [
+								"{{URL}}quiz"
+							],
+							"path": [
+								"42a25b19-2110-46fd-a80b-fe8bdb3cc27d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Quiz",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}quiz/42a25b19-2110-46fd-a80b-fe8bdb3cc27d",
+							"host": [
+								"{{URL}}quiz"
+							],
+							"path": [
+								"42a25b19-2110-46fd-a80b-fe8bdb3cc27d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Quiz",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}quiz",
+							"host": [
+								"{{URL}}quiz"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Quiz",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}quiz/42a25b19-2110-46fd-a80b-fe8bdb3cc27d",
+							"host": [
+								"{{URL}}quiz"
+							],
+							"path": [
+								"42a25b19-2110-46fd-a80b-fe8bdb3cc27d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "takeQuiz",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}quiz/takeQuiz/42a25b19-2110-46fd-a80b-fe8bdb3cc27d",
+							"host": [
+								"{{URL}}quiz"
+							],
+							"path": [
+								"takeQuiz",
+								"42a25b19-2110-46fd-a80b-fe8bdb3cc27d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Quiz",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"answersIds\": [\"24fe84e0-692f-4f6b-953a-f2e9702e2628\", \"bd853916-ea1d-4bb4-b4c5-9a7fc23e481e\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}quiz/submit?qId=75bb738e-2da8-4d68-914c-038077b16d06&sId=cccb68a0-38b5-4d72-9588-7da361e417c4",
+							"host": [
+								"{{URL}}quiz"
+							],
+							"path": [
+								"submit"
+							],
+							"query": [
+								{
+									"key": "qId",
+									"value": "75bb738e-2da8-4d68-914c-038077b16d06"
+								},
+								{
+									"key": "sId",
+									"value": "cccb68a0-38b5-4d72-9588-7da361e417c4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Question",
+			"item": [
+				{
+					"name": "Create Question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"question\": \"ما هي نظرية الكرموسومات؟\",\r\n  \"quizId\": \"75bb738e-2da8-4d68-914c-038077b16d06\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}questions",
+							"host": [
+								"{{URL}}questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Question",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"question\": \"ما هي نظرية الكرموسومات؟\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}questions/949eff2c-f5c1-4dd3-b167-877c484aa56c",
+							"host": [
+								"{{URL}}questions"
+							],
+							"path": [
+								"949eff2c-f5c1-4dd3-b167-877c484aa56c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}questions/949eff2c-f5c1-4dd3-b167-877c484aa56c",
+							"host": [
+								"{{URL}}questions"
+							],
+							"path": [
+								"949eff2c-f5c1-4dd3-b167-877c484aa56c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}questions",
+							"host": [
+								"{{URL}}questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Question",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}questions/949eff2c-f5c1-4dd3-b167-877c484aa56c",
+							"host": [
+								"{{URL}}questions"
+							],
+							"path": [
+								"949eff2c-f5c1-4dd3-b167-877c484aa56c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Answer",
+			"item": [
+				{
+					"name": "Create Answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"answer\": \"x*y = baby\",\r\n    \"status\":true,\r\n    \"questionId\": \"a75ebf11-b340-4b62-b62d-2fb8328bcbb6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}answers",
+							"host": [
+								"{{URL}}answers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Answer",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"answer\": \"x-y = baby\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}answers/cd4475be-2160-436b-a02f-cf44d9478959",
+							"host": [
+								"{{URL}}answers"
+							],
+							"path": [
+								"cd4475be-2160-436b-a02f-cf44d9478959"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}answers/cd4475be-2160-436b-a02f-cf44d9478959",
+							"host": [
+								"{{URL}}answers"
+							],
+							"path": [
+								"cd4475be-2160-436b-a02f-cf44d9478959"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}answers",
+							"host": [
+								"{{URL}}answers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Answer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}answer/cd4475be-2160-436b-a02f-cf44d9478959",
+							"host": [
+								"{{URL}}answer"
+							],
+							"path": [
+								"cd4475be-2160-436b-a02f-cf44d9478959"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "create payment",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
