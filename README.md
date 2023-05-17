@@ -1,7 +1,7 @@
 
 ## Education platform
 
-This is a web application for a educaional  platform site. It is built using Nestjs and  includes several features such as user authentication, email confirmation, external login , admin and student management, CRUD for level, courses, subject, lesson, quiz,qus,ans, pay course with Stripe payment 
+This is a web application for a educaional  platform site. It is built using Nestjs and  includes several features such as user authentication, email confirmation, external login , admin and student management, CRUD for level, courses, subject, lesson, quiz,questions,answers, pay course with Stripe payment, and upload video lectures and pdf materials. 
 
 ## Technology Stack
 Nestjs
