@@ -12,8 +12,6 @@ Our web application offers an array of powerful features to make the educational
 
 - **Email Confirmation**: Users can enjoy a smooth onboarding experience through email confirmation, bolstering the security of their accounts.
 
-- **External Login**: We've integrated external login options, making it easier for users to access the platform using their preferred third-party accounts.
-
 - **Admin and Student Management**: This platform caters to both administrators and students, allowing for comprehensive management of user roles and permissions.
 
 - **CRUD Operations**: You can easily manage levels, courses, subjects, lessons, quizzes, questions, and answers with our intuitive CRUD functionality.
